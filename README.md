@@ -1,1 +1,1 @@
-# PredictingColoradoWildfires
+# Predicting Colorado Wildfires
