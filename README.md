@@ -239,9 +239,47 @@ df_co['NEAREST_STATION'] = df_co.apply(lambda row: get_nearest_station(row.LATIT
 
 
 
+## Logistic Regression Model
 
+```
+# Create Logistic Regression model
+lr_model =  LogisticRegression(solver='liblinear') 
 
+# Fit the LR model with data 
+lr_model.fit(x_train,y_train) 
 
+# Create predictions
+y_pred=lr_model.predict(x_test) 
+y_pred 
+
+```
+
+Output:
+Accuracy: 0.8062953257358767
+Precision: 0.5859697386519945
+Recall: 0.06572045664918236
+
+![output5](https://user-images.githubusercontent.com/75912501/195901390-bd17ded8-87aa-4970-b0e2-ebb4b7eecb35.png)
+
+## Random Forest Model
+
+```
+# creating a RF classifier
+rfClass = RandomForestClassifier(n_estimators = 100) 
+ 
+# Fit model
+rfClass.fit(x_train, y_train)
+ 
+# Perform Predictions
+y_pred = rfClass.predict(x_test)
+
+```
+Output:
+Accuracy:  0.8137607410567371
+Precision:  0.5717054263565892
+Recall:  0.2275532243134835
+
+![output6](https://user-images.githubusercontent.com/75912501/195901405-e0c1bdcf-ec49-4ad0-8694-a3b211655fe9.png)
 
 
 
