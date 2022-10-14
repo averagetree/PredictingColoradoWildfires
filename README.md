@@ -2,8 +2,7 @@
 
 ## Overview
 
-
-
+The overall goal for this analysis is to assess the weather conditions that are correlated with wildfire occurrences in the state of Colorado and attempt to make predictions for future wildfires.  
 
 ## Data Sources
 
@@ -19,7 +18,7 @@ print(cursor. fetchall())
 df = pd.read_sql_query("SELECT * FROM Fires", cnx)
 
 ```
-Colorado is the sole focus for this analysis, so the data set is trimmed down to just the state of Colorado. Additionally, the 
+Colorado is the sole focus for this analysis, so the data set is trimmed down to just the state of Colorado. 
 
 ```
 df_co = df.loc[df['STATE'] == "CO"]
@@ -31,13 +30,9 @@ The second data set consists of weather data captured from various weather stati
 ```
 df_weather = pd.read_csv('3090639.csv')
 
-df_weather.info()
-
-
 ```
 
-
-
+It was a challenge to find weather 
 
 ## Exploratory Data Analysis
 
@@ -234,6 +229,8 @@ df_co['NEAREST_STATION'] = df_co.apply(lambda row: get_nearest_station(row.LATIT
 
 ```
 
+
+![output3](https://user-images.githubusercontent.com/75912501/195848932-a6d230b0-25ae-4ce9-832a-6963168e6a7b.png)
 
 
 
