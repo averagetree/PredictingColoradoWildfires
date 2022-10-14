@@ -13,6 +13,8 @@
 
 ## Exploratory Data Analysis
 
+
+```
 Get the Lat/Long for weather location
 
 RIFLE GARFIELD CO AIRPORT, CO US           39.5227° N, 107.7180° W
@@ -46,8 +48,9 @@ TRINIDAD AIRPORT, CO US                    37.1695° N, 104.5005° W
 LEADVILLE LAKE CO AIRPORT, CO US           39.2239° N, 106.3146° W
 
 Source: Google Search
+```
 
-
+A key component of this analysis requires both the weather and wildfire datasets to be linked together. This can be done by identifying the nearest weather station to each wildfire instance. The following algorithm finds the nearest lat/long from a list of lat/long values from a given lat/long value. 
 
 ```
 from math import cos, asin, sqrt
