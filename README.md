@@ -69,6 +69,9 @@ def get_nearest_station(lat, long):
     nearestStationLatLong = closest(stationLatLongList, v)
     nearestStation = lat_key_list[lat_value_list.index(nearestStationLatLong['lat'])]
     return nearestStation
+
+df_co['NEAREST_STATION'] = df_co.apply(lambda row: get_nearest_station(row.LATITUDE, row.LONGITUDE), axis=1)
+
 ```
 
 
