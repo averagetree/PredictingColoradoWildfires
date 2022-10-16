@@ -32,10 +32,11 @@ df_weather = pd.read_csv('3090639.csv')
 
 ```
 
-It was a challenge to find weather 
+It was a challenge to find weather data that was complete at a granular level, as the data was either too general or just missing key values.
 
 ## Exploratory Data Analysis
 
+Contents of the wildfire data set.
 
 ```
 df_co.info()
@@ -87,6 +88,8 @@ memory usage: 17.8+ MB
 
 ```
 
+Drop unused values from the wildfire data set.
+
 ```
 # Drop unused columns
 df_co.drop(columns=['FPA_ID', 'SOURCE_SYSTEM_TYPE', 'SOURCE_SYSTEM', 'NWCG_REPORTING_AGENCY', 'NWCG_REPORTING_AGENCY', 
@@ -98,6 +101,7 @@ df_co.drop(columns=['FPA_ID', 'SOURCE_SYSTEM_TYPE', 'SOURCE_SYSTEM', 'NWCG_REPOR
 
 ```
 
+Contents of the Weather data set.
 
 ```
 <class 'pandas.core.frame.DataFrame'>
@@ -154,6 +158,7 @@ dtypes: float64(42), object(3)
 memory usage: 45.1+ MB
 
 ```
+Drop unused columns from the weather data set. Most were empty or contained irrelavant ID values.
 
 ```
 # Drop unused columns
@@ -163,8 +168,13 @@ df_weather.drop(columns=['WT01','WT02','WT03','WT04','WT05','WT06','WT07','WT08'
 
 ```
 
+Further cleanup/format changes to the data.
 
+```
+df_weather = df_weather.fillna(0)
+df_weather['DATE'] = pd.to_datetime(df_weather.DATE)
 
+```
 
 ```
 Get the Lat/Long for weather location
@@ -202,7 +212,7 @@ LEADVILLE LAKE CO AIRPORT, CO US           39.2239° N, 106.3146° W
 Source: Google Search
 ```
 
-A key component of this analysis requires both the weather and wildfire datasets to be linked together. This can be done by identifying the nearest weather station to each wildfire instance. The following algorithm finds the nearest lat/long from a list of lat/long values from a given lat/long value. 
+A key component of this analysis requires both the weather and wildfire datasets to be linked together. This can be done by identifying the nearest weather station to each wildfire instance. The following algorithm finds the nearest lat/long from a list of lat/long values from a given lat/long value. Source from StackOverflow. 
 
 ```
 from math import cos, asin, sqrt
@@ -231,13 +241,6 @@ df_co['NEAREST_STATION'] = df_co.apply(lambda row: get_nearest_station(row.LATIT
 
 
 ![output3](https://user-images.githubusercontent.com/75912501/195848932-a6d230b0-25ae-4ce9-832a-6963168e6a7b.png)
-
-
-
-
-## 
-
-
 
 ## Logistic Regression Model
 
