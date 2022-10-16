@@ -238,9 +238,17 @@ def get_nearest_station(lat, long):
 df_co['NEAREST_STATION'] = df_co.apply(lambda row: get_nearest_station(row.LATITUDE, row.LONGITUDE), axis=1)
 
 ```
+With the nearest station identified for each wildfire observation, the weather data set can be updated to reflect whether or not a wildfire occurred for a certain station on a certain day.
 
+```
+for i, row in df_co.iterrows():
+    df_weather.loc[((df_weather.DATE == row.DISCOVERY_DATE) & (df_weather.NAME == row.NEAREST_STATION)), 'FIRE'] = 1
 
-![output3](https://user-images.githubusercontent.com/75912501/195848932-a6d230b0-25ae-4ce9-832a-6963168e6a7b.png)
+df_weather['FIRE'] = df_weather['FIRE'].fillna(0)
+```
+
+![output4](https://user-images.githubusercontent.com/75912501/196061129-167cd36c-1f77-42f7-b792-912b45535a77.png)
+
 
 ## Logistic Regression Model
 
@@ -258,11 +266,16 @@ y_pred
 ```
 
 Output:
+
 Accuracy: 0.8062953257358767
+
 Precision: 0.5859697386519945
+
 Recall: 0.06572045664918236
 
 ![output5](https://user-images.githubusercontent.com/75912501/195901390-bd17ded8-87aa-4970-b0e2-ebb4b7eecb35.png)
+
+Overall, the Logistic Regression model does a decent job at a 0.806 accuracy. I believe this number could be improved with a more complete data set.
 
 ## Random Forest Model
 
@@ -278,9 +291,14 @@ y_pred = rfClass.predict(x_test)
 
 ```
 Output:
+
 Accuracy:  0.8137607410567371
+
 Precision:  0.5717054263565892
+
 Recall:  0.2275532243134835
+
+Overall, the Random Forest model does a better job than the Logistic Regression model at a 0.814 accuracy. As with the Logistic Regression Model, I believe this number could be improved with a more complete data set.
 
 ![output6](https://user-images.githubusercontent.com/75912501/195901405-e0c1bdcf-ec49-4ad0-8694-a3b211655fe9.png)
 
